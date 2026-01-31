@@ -1,0 +1,428 @@
+/* Base page sizing */
+html, body {
+    height: 100%;
+    font-family: "Minecraft";
+}
+
+body {
+    height: 100vh;
+    margin: 0;
+    overflow: hidden; /* keep the page from double-scrolling */
+}
+
+/* Banner stays fixed height */
+#banner {
+    position: relative;
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+    background-image: url("/static/img/Bedrock.webp");
+    background-repeat: repeat;
+    background-size: 5%;
+    height: 10vh;
+    width: 100%;
+    overflow: hidden;
+}
+
+#newmoon {
+    align-self: flex-start;
+    margin-left: 1em;
+    animation: glitch 5.2s infinite;
+    height: 100%;
+}
+
+#newmoon:hover {
+    animation: pulse2 1.2s infinite, glitch 1s infinite;
+}
+
+#titleSplash {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    margin: 0;
+    transform: translate(-50%, -50%); /* dead center both axes */
+
+    max-width: calc(100% - 140px);    /* keeps it inside banner; adjust 140px */
+    white-space: normal;              /* allow wrapping */
+    text-align: center;
+
+    padding: 10px;
+    background-image: url("/static/img/Gateway.webp");
+    border-radius: 20px;
+    color: #00fff6;
+    box-shadow: 0 0 10px 5px #f700ff;
+    box-sizing: border-box;
+    font-size: 2vw;
+}
+
+/* Main layout takes remaining space under banner */
+#container {
+    background-image: url("/static/img/Netherbrick.webp");
+    background-repeat: repeat;
+    background-size: 10%;
+    display: flex;
+    flex-direction: row;
+    height: calc(100vh - 10vh);  /* fill rest of viewport */
+    min-height: 0;              /* IMPORTANT: allows children to shrink/scroll */
+}
+
+/* Columns */
+#leftSide {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    margin-left: 1vw;
+    width: 25%;
+    height: 100%;
+    overflow-y: auto; /* left side can scroll if needed */
+    min-height: 0;
+}
+
+#leftSide > * {
+    /*margin-left: 0;*/
+}
+
+#inputText {
+    /*padding-left: 15%;*/
+    width: 90%;
+    padding: 10px 12px;
+    box-sizing: border-box;
+    text-align: center;
+    background-color: #000049;
+    border: solid 2px #00fff6;
+    color: #00fff6;
+    border-radius: 10px;
+}
+
+.img-checkbox {
+    display: inline-flex;
+    cursor: pointer;
+    align-items: center;
+}
+
+.img-checkbox input {
+    display: none;
+}
+
+.img-checkbox .box {
+    width: 48px;
+    height: 48px;
+    display: inline-block;
+    flex-shrink: 0;
+
+    background-image: url("/static/img/pumpkinUnlit.webp");
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+.img-checkbox input:checked + .box {
+    background-image: url("/static/img/pumpkinLit.webp");
+}
+
+.img-checkbox:hover .box {
+    filter: brightness(1.5);
+}
+
+.img-checkbox .label-text {
+    background-color: #000049;
+    margin-left: 10px;
+    line-height: 1;
+    position: relative;
+    padding: 5px;
+    border-radius: 10px;
+    border: solid #00fff6;
+
+    color: #00fff6;
+    user-select: none;
+}
+
+#buttonDiv {
+    margin-top: 5%;
+}
+
+#moreInputs {
+    background-image: url("/static/img/Increase.webp");
+    background-repeat: no-repeat;
+    background-size: 100%;
+    width: 48px;
+    height: 48px;
+}
+
+#lessInputs {
+    background-image: url("/static/img/Decrease.webp");
+    background-repeat: no-repeat;
+    background-size: 100%;
+    width: 48px;
+    height: 48px;
+}
+
+#genCommand,
+#outputText {
+    align-self: flex-start;
+    width: auto;
+    margin: 0;
+}
+
+#genCommand {
+    min-height: 50px;
+    display: block;
+    height: 5%;
+    margin-bottom: 8px;
+    font-family: "Minecraft";
+    background-image: url("/static/img/woodButton.webp");
+    background-repeat: repeat;
+    background-size: 200%;
+}
+
+#outputText {
+    display: inline-block;
+    width: fit-content;
+    max-width: 90%;
+    background-color: #000049;
+    padding: 5px;
+    border-radius: 10px;
+    border: solid #00fff6;
+    color: #00fff6;
+}
+
+
+
+#rightSide {
+    margin-right: 1vw;
+    margin-top: 0;          /* don't push down and cause overflow */
+    display: flex;
+    justify-content: center;
+    width: 75%;
+    height: 100%;
+    min-height: 0;          /* IMPORTANT */
+}
+
+/* Grey instructions card */
+#instructions {
+    background-image: url("/static/img/packedIce.webp");
+    background-repeat: repeat;
+    background-size: 10%;
+    width: 60%;
+    border-radius: 20px;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    /* Make it fit and scroll internally */
+    height: calc(100% - 6vh);
+    margin: 3vh 0;
+    max-height: 100%;
+    overflow-y: auto;
+    overflow-x: hidden;
+    min-height: 0;
+
+    /* padding so text doesn't touch edges */
+    padding: 16px;
+    padding-bottom: 40px;
+    box-sizing: border-box;
+}
+
+/* Text styling (unchanged, just safer) */
+#headline {
+    margin-bottom: 0;
+    color: #ffffff;
+    background-color: rgba(0, 0, 0, 0.46);
+    border-radius: 10px;
+    padding: 5px;
+    text-align: center;
+}
+
+#followup,
+#explanation,
+#diy {
+    color: #ffffff;
+
+    background-color: rgba(0, 0, 0, 0.46);
+    border-radius: 10px;
+    padding: 5px;
+    text-align: center;
+}
+
+#linky {
+    color: #00ffda;
+}
+
+#linky:visited {
+    color: #00ffda;
+}
+
+/* Your big paragraphs should not force width/height weirdness */
+#explanation,
+#diy {
+    margin-left: 1vw;
+    margin-right: 1vw;
+    text-align: center;
+}
+
+/* DIY section layout */
+#diyDiv {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    width: 100%;
+    min-height: 0;
+    align-items: center;
+}
+
+#diagram {
+    width: 100%;
+    max-width: 100%;
+    height: auto;
+    margin: 0 12px;
+    align-self: center;
+    box-sizing: border-box;
+}
+
+#chainLine {
+    display: inline-block;
+    width: fit-content;
+    max-width: 90%;
+    background-color: #000049;
+    padding: 5px;
+    border-radius: 10px;
+    border: solid #00fff6;
+    color: #00fff6;
+}
+
+#repeaters {
+    display: inline-block;
+    width: fit-content;
+    max-width: 90%;
+    background-color: #000049;
+    padding: 5px;
+    border-radius: 10px;
+    border: solid #00fff6;
+    color: #00fff6;
+}
+
+#commands {
+    width: 90%;
+    min-width: 0;
+    margin: 0 auto;
+}
+
+/* PRE wrapping fixes */
+pre,
+.command,
+#output {
+    white-space: pre-wrap;     /* wrap */
+    overflow-wrap: anywhere;   /* break long tokens */
+    word-break: break-word;    /* older browsers */
+}
+
+/* Command blocks */
+.command {
+    max-width: 100%;
+    overflow-x: hidden;
+    background-image: url("/static/img/blackstone.webp");
+    background-repeat: repeat;
+    background-size: 10%;
+    color: #00ffd5;
+    border-radius: 6px;
+    padding: 10px;
+    box-sizing: border-box;
+    font-family: "Minecraft";
+}
+
+/* Inputs */
+#inputFields {
+    display: flex;
+    flex-direction: column;
+
+    align-items: center;
+    width: 100%
+}
+
+.input {
+    margin: 30px;
+    width: 90%;
+    aspect-ratio: 2/1;
+    box-sizing: border-box;
+    background-image: url("/static/img/Snow.webp");
+    background-size: 5%;
+    background-repeat: repeat;
+    font-size: 15px;
+    font-family: "Minecraft";
+}
+
+/* Output */
+#output {
+    width: 100%;
+    max-width: 100%;
+    font-size: 15px;
+    overflow-x: hidden;
+    background: #111;
+    color: #0f0;
+    border: solid #0f0;
+    padding: 12px;
+    border-radius: 6px;
+    font-family: "Minecraft";
+    box-sizing: border-box;
+    min-height: 200px;
+    aspect-ratio: 2 / 1;
+}
+
+/* Disabled button styling */
+.disabled {
+    cursor: not-allowed;
+    opacity: 0.6;
+}
+
+
+/* ANIMATIONS */
+@keyframes glitch {
+    45% {
+        filter: none;
+    }
+    46% {
+        filter: url(#dist-01);
+    }
+    47% {
+        filter: url(#dist-02);
+    }
+    48% {
+        filter: url(#dist-03);
+    }
+    50% {
+        filter: none;
+    }
+    95% {
+        filter: none;
+    }
+    96% {
+        filter:  url(#dist-02);
+    }
+    97% {
+        filter:  url(#dist-04);
+    }
+}
+
+@keyframes pulse2 {
+    0% {
+        opacity: 0.5;
+    }
+    70% {
+        opacity: 1;
+    }
+    100% {
+        opacity: 0.5;
+    }
+}
+
+/* FONTS */
+
+@font-face {
+    font-display: swap;
+    font-family: 'Minecraft';
+    font-style: normal;
+    font-weight: 400;
+    src: url('/static/fonts/minecraft.woff2') format('woff2');
+}
