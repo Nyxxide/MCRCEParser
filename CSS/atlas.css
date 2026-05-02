@@ -1,0 +1,232 @@
+/* =========================
+   ATLAS MANAGER
+========================= */
+
+.atlas-manager-shell {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+    min-height: 0;
+}
+
+.atlas-manager-grid {
+    display: grid;
+    grid-template-columns: minmax(420px, 1fr) 280px;
+    gap: 18px;
+    align-items: start;
+}
+
+.atlas-manager-left,
+.atlas-manager-right {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    min-width: 0;
+}
+
+.atlas-field {
+    min-width: 0;
+}
+
+.atlas-picker-display {
+    width: 100%;
+    min-height: 62px;
+    padding: 10px 14px;
+    border-radius: var(--radius-sm);
+    border: 1px solid var(--border);
+    background: #0d1016;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    justify-content: space-between;
+}
+
+.atlas-picker-display:hover {
+    background: #111621;
+}
+
+.atlas-picker-display-icon {
+    width: 28px;
+    height: 28px;
+    flex: 0 0 28px;
+    background-repeat: no-repeat;
+    background-position: 0 0;
+    image-rendering: pixelated;
+}
+
+.atlas-picker-display-name {
+    flex: 1 1 auto;
+    text-align: left;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    font-family: "Minecraft", var(--font);
+    font-size: 18px;
+}
+
+.atlas-picker-display-caret {
+    flex: 0 0 auto;
+    opacity: 0.85;
+    font-size: 14px;
+}
+
+.atlas-picker-dropdown {
+    margin-top: 10px;
+    border: 1px solid var(--border);
+    border-radius: var(--radius-sm);
+    background: #0d1016;
+    overflow: hidden;
+    box-shadow: var(--shadow);
+}
+
+.atlas-picker-list {
+    max-height: 360px;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+}
+
+.atlas-picker-list::-webkit-scrollbar {
+    width: 8px;
+}
+
+.atlas-picker-list::-webkit-scrollbar-thumb {
+    background: var(--border);
+    border-radius: 8px;
+}
+
+.atlas-picker-item {
+    width: 100%;
+    border: 0;
+    border-radius: 0;
+    background: transparent;
+    color: var(--text);
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 12px 14px;
+    text-align: left;
+    justify-content: flex-start;
+}
+
+.atlas-picker-item:hover {
+    background: rgba(255, 255, 255, 0.06);
+}
+
+.atlas-picker-item.active {
+    background: rgba(79, 140, 255, 0.16);
+}
+
+.atlas-picker-item-icon {
+    width: 24px;
+    height: 24px;
+    flex: 0 0 24px;
+    background-repeat: no-repeat;
+    background-position: 0 0;
+    image-rendering: pixelated;
+}
+
+.atlas-picker-item-label {
+    font-family: "Minecraft", var(--font);
+    font-size: 18px;
+    line-height: 1.2;
+}
+
+.atlas-preview-label {
+    font-size: 0.85rem;
+    color: var(--muted);
+}
+
+.atlas-preview-box {
+    min-height: 220px;
+    border: 1px solid var(--border);
+    border-radius: var(--radius-sm);
+    background: #0d1016;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 12px;
+}
+
+.atlas-preview-box-large {
+    min-height: 280px;
+}
+
+.atlas-preview-sprite {
+    width: 96px;
+    height: 96px;
+    background-repeat: no-repeat;
+    background-position: 0 0;
+    image-rendering: pixelated;
+}
+
+.atlas-preview-sprite-large {
+    width: 128px;
+    height: 128px;
+}
+
+.atlas-meta-box {
+    border: 1px solid var(--border);
+    border-radius: var(--radius-sm);
+    background: rgba(0, 0, 0, 0.18);
+    padding: 12px 14px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    font-size: 0.94rem;
+}
+
+.atlas-object-fields {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+/* =========================
+   INLINE ATLAS NODE
+========================= */
+
+.atlas-inline {
+    display: inline-block !important;
+    position: relative;
+    width: 1.15em;
+    height: 1.15em;
+    min-width: 1.15em;
+    min-height: 1.15em;
+    vertical-align: -0.18em;
+    line-height: 1;
+    cursor: pointer;
+    outline: 1px solid transparent;
+    border-radius: 2px;
+    overflow: visible;
+    background: transparent !important;
+}
+
+.rich-editor .atlas-inline {
+    margin: 0 2px;
+}
+
+.atlas-main-layer,
+.atlas-shadow-layer {
+    position: absolute;
+    inset: 0;
+    background-repeat: no-repeat;
+    background-position: 0 0;
+    background-color: transparent;
+    image-rendering: pixelated;
+    pointer-events: none;
+}
+
+.atlas-shadow-layer {
+    z-index: 0;
+}
+
+.atlas-main-layer {
+    z-index: 1;
+}
+
+
+.atlas-inline-node[data-underlined="0"],
+.atlas-inline-node[data-strikethrough="0"] {
+    text-decoration: none !important;
+}

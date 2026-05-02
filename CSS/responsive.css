@@ -1,0 +1,143 @@
+@media (max-width: 1250px) {
+    .settings-grid {
+        grid-template-columns: 1fr 1fr;
+    }
+
+    .atlas-manager-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 1100px) {
+    .layout {
+        grid-template-columns: 1fr;
+    }
+
+    .left-pane,
+    .right-pane {
+        grid-template-rows: auto;
+    }
+
+    .replace-toolbar {
+        width: 100%;
+    }
+
+    .replace-toolbar input {
+        flex: 1 1 200px;
+        width: auto;
+    }
+
+    .format-modal-card {
+        width: 96%;
+    }
+}
+
+@media (max-width: 900px) {
+    .command-row {
+        grid-template-columns: 1fr;
+        min-height: 0;
+    }
+
+    .drag-handle-wrap,
+    .command-label {
+        padding-top: 0;
+    }
+
+    .drag-handle-wrap {
+        align-items: flex-start;
+    }
+
+    .command-label {
+        min-width: 0;
+        justify-content: flex-start;
+    }
+
+    .command-text {
+        height: auto;
+    }
+
+    .command-controls {
+        flex-direction: row;
+        flex-wrap: wrap;
+        min-width: 0;
+    }
+
+    .command-controls button {
+        width: auto;
+        flex: 1 1 140px;
+    }
+
+    .settings-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .modal-footer-split {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .modal-footer-left,
+    .modal-footer-center,
+    .modal-footer-right {
+        width: 100%;
+        justify-content: stretch;
+    }
+
+    .modal-footer-left button,
+    .modal-footer-center button,
+    .modal-footer-right button {
+        width: 100%;
+    }
+}
+
+@media (max-width: 700px) {
+    body {
+        padding: 10px;
+    }
+
+    .replace-toolbar {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .replace-toolbar input {
+        width: 100%;
+    }
+
+    .command-controls {
+        flex-direction: column;
+    }
+
+    .command-controls button {
+        width: 100%;
+        flex: none;
+    }
+
+    .toolbar-group {
+        width: 100%;
+    }
+
+    .selection-toolbar {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .toolbar-inline-buttons {
+        flex-wrap: wrap;
+    }
+
+    .modal-tabs,
+    .modal-subtabs {
+        flex-wrap: wrap;
+    }
+
+    .atlas-picker-display-name,
+    .atlas-picker-item-label {
+        font-size: 16px;
+    }
+
+    .atlas-preview-sprite-large {
+        width: 96px;
+        height: 96px;
+    }
+}

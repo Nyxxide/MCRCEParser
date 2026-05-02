@@ -1,0 +1,243 @@
+/* =========================
+   MODAL SYSTEM
+========================= */
+
+.modal-backdrop {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.65);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 999;
+}
+
+.modal-card {
+    width: 720px;
+    max-width: 95%;
+    max-height: 80vh;
+    background: linear-gradient(180deg, var(--panel), var(--panel-2));
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    display: flex;
+    flex-direction: column;
+}
+
+.format-modal-card {
+    width: 1120px;
+    max-width: 96%;
+    max-height: 88vh;
+}
+
+.modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 16px 18px;
+    border-bottom: 1px solid var(--border);
+}
+
+.modal-close-btn {
+    font-size: 20px;
+    width: 42px;
+    height: 42px;
+}
+
+.modal-body {
+    padding: 16px 18px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    overflow: auto;
+    min-height: 0;
+}
+
+.modal-footer {
+    padding: 16px 18px;
+    border-top: 1px solid var(--border);
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 12px;
+}
+
+.modal-footer-split {
+    justify-content: space-between;
+}
+
+.modal-footer-left,
+.modal-footer-center,
+.modal-footer-right {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.modal-footer-center {
+    justify-content: center;
+    flex: 1 1 auto;
+}
+
+.modal-tabs,
+.modal-subtabs {
+    display: flex;
+    gap: 10px;
+}
+
+.modal-tab-btn {
+    padding: 10px 16px;
+    border-radius: 12px;
+    background: var(--button-secondary);
+}
+
+.modal-tab-btn.active {
+    background: var(--accent);
+}
+
+.modal-tab-panel {
+    display: none;
+    min-height: 0;
+}
+
+.modal-tab-panel.active {
+    display: block;
+}
+
+/* =========================
+   SELECTION PREVIEW
+========================= */
+
+.modal-selection-preview-wrap {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.modal-selection-label {
+    font-size: 0.85rem;
+    color: var(--muted);
+}
+
+.modal-selection-preview {
+    padding: 10px 12px;
+    border-radius: var(--radius-sm);
+    border: 1px solid var(--border);
+    background: #0d1016;
+    font-family: "Minecraft";
+    font-size: 18px;
+    min-height: 58px;
+    display: flex;
+    align-items: center;
+    overflow: auto;
+}
+
+/* =========================
+   FORMATTING / GRADIENT UI
+========================= */
+
+.formatting-controls-panel {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    min-height: 0;
+}
+
+.formatting-toggle-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.gradient-panel {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    min-height: 0;
+}
+
+.gradient-panel-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 12px;
+}
+
+.gradient-panel-title {
+    font-weight: 600;
+}
+
+.gradient-stops-container {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    max-height: 220px;
+    overflow-y: auto;
+    padding-right: 4px;
+}
+
+.gradient-stops-container::-webkit-scrollbar {
+    width: 6px;
+}
+
+.gradient-stops-container::-webkit-scrollbar-thumb {
+    background: var(--border);
+    border-radius: 6px;
+}
+
+.gradient-stops-container::-webkit-scrollbar-thumb:hover {
+    background: var(--muted);
+}
+
+.gradient-stop-row {
+    display: grid;
+    grid-template-columns: auto auto 1fr auto auto;
+    gap: 8px;
+    align-items: center;
+}
+
+.gradient-picker-btn {
+    width: 42px;
+    height: 42px;
+    border-radius: 10px;
+    overflow: hidden;
+    padding: 0;
+    border: 1px solid var(--border);
+}
+
+.gradient-picker-btn input {
+    width: 100%;
+    height: 100%;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+    background: transparent;
+}
+
+.gradient-hash-label {
+    opacity: 0.6;
+    font-family: var(--mono);
+    justify-self: center;
+}
+
+.gradient-color-hex {
+    width: 100%;
+}
+
+.gradient-add-btn,
+.gradient-remove-btn {
+    width: 42px;
+    min-width: 42px;
+    padding: 0;
+    height: 42px;
+}
+
+.shadow-opacity-panel {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.shadow-opacity-panel input {
+    width: 120px;
+}

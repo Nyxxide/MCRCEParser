@@ -1,0 +1,536 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>CBT - MCParser</title>
+  <link rel="stylesheet" href="CSS/styles.css" />
+  <link id="favicon" rel="icon" type="image/x-icon" href="Images/CmdTag.ico">
+</head>
+<body>
+<div class="app-shell">
+  <div class="layout">
+    <div class="left-pane">
+      <section class="panel">
+        <h2>Reverse parser</h2>
+
+        <label for="reverseInput">Paste a full /give command created by this editor:</label>
+        <textarea id="reverseInput" class="mono reverse-box"></textarea>
+
+        <div class="button-row">
+          <button id="reverseParseBtn">Un-parse Into Editor</button>
+          <button id="clearReverseBtn" class="secondary">Clear</button>
+        </div>
+      </section>
+
+      <section class="panel">
+        <h2>Parser Tools</h2>
+
+        <div class="modal-tabs">
+          <button id="segmentParserTabBtn" type="button" class="modal-tab-btn active">Single-layer Parser</button>
+          <button id="minecartParserTabBtn" type="button" class="modal-tab-btn">Minecart Chain Parser</button>
+        </div>
+
+        <div id="segmentParserTabPanel" class="modal-tab-panel active">
+          <label for="segmentInput">Input text to escape one layer down:</label>
+          <textarea id="segmentInput" class="mono tall"></textarea>
+
+          <div class="button-row">
+            <button id="parseSegmentBtn">Parse One Layer</button>
+            <button id="clearSegmentBtn" class="secondary">Clear</button>
+          </div>
+
+          <label for="segmentOutput">Escaped output:</label>
+          <textarea id="segmentOutput" class="mono tall" readonly></textarea>
+
+          <div class="button-row">
+            <button id="copySegmentBtn" class="secondary">Copy Escaped Output</button>
+          </div>
+        </div>
+
+        <div id="minecartParserTabPanel" class="modal-tab-panel">
+          <label for="minecartChainInput">Paste a raw falling_block / command_block_minecart summon chain:</label>
+          <textarea id="minecartChainInput" class="mono tall"></textarea>
+
+          <div class="button-row">
+            <button id="parseMinecartChainBtn">Un-parse Minecart Chain</button>
+            <button id="clearMinecartChainBtn" class="secondary">Clear</button>
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <div class="right-pane">
+      <section class="panel settings-panel">
+        <h2>Settings</h2>
+
+        <div class="settings-grid">
+          <div class="field">
+            <label for="summonPos">Summon position</label>
+            <input id="summonPos" type="text" value="~ ~0.5 ~" />
+          </div>
+
+          <div class="field">
+            <label for="itemId">Item id</label>
+            <input id="itemId" type="text" value="minecraft:grass_block" />
+          </div>
+
+          <div class="field">
+            <label for="itemModel">Item model</label>
+            <input id="itemModel" type="text" placeholder="minecraft:grass_block" />
+          </div>
+
+          <div class="field">
+            <label for="targetPlayer">Target player</label>
+            <input id="targetPlayer" type="text" placeholder="Player name" />
+          </div>
+
+          <div class="field">
+            <label for="cmdStorageMode">Command storage mode</label>
+            <select id="cmdStorageMode">
+              <option value="minecart_chain">Minecart Chain</option>
+              <option value="direct_cmd">Direct Command</option>
+            </select>
+          </div>
+        </div>
+      </section>
+
+      <section class="panel styled-text-panel">
+        <h2>Styled Name &amp; Lore</h2>
+
+        <div class="styled-sections">
+          <div class="styled-block">
+            <div class="styled-block-header">
+              <h3>Custom Name</h3>
+            </div>
+
+            <div class="editor-block">
+              <div class="selection-toolbar">
+                <div class="toolbar-group toolbar-inline-buttons">
+                  <button id="nameBoldBtn" type="button" class="tool-btn" title="Bold"><strong>B</strong></button>
+                  <button id="nameItalicBtn" type="button" class="tool-btn" title="Italic"><em>I</em></button>
+                  <button id="nameUnderlineBtn" type="button" class="tool-btn" title="Underline"><span class="tool-underline">U</span></button>
+                  <button id="nameStrikethroughBtn" type="button" class="tool-btn" title="Strikethrough"><span class="tool-strike">S</span></button>
+                  <button id="nameClearStyleBtn" type="button" class="tool-btn secondary" title="Clear formatting">Clear</button>
+                </div>
+
+                <div class="toolbar-group toolbar-inline-buttons">
+                  <button
+                          id="openNameColorModalBtn"
+                          type="button"
+                          class="tool-btn color-tool-btn"
+                          title="Open text/shadow color editor"
+                  >
+                    Color
+                  </button>
+                  <button
+                          id="openNameAtlasModalBtn"
+                          type="button"
+                          class="tool-btn atlas-tool-btn"
+                          title="Insert atlas sprite"
+                  >
+                    Atlas
+                  </button>
+                </div>
+              </div>
+
+              <div
+                      id="customNameEditor"
+                      class="rich-editor single-line"
+                      contenteditable="true"
+                      spellcheck="false"
+                      data-placeholder="Your Fancy New Name"
+              ></div>
+            </div>
+          </div>
+
+          <div class="styled-block">
+            <div class="styled-block-header">
+              <h3>Item Lore</h3>
+            </div>
+
+            <div class="editor-block">
+              <div class="selection-toolbar">
+                <div class="toolbar-group toolbar-inline-buttons">
+                  <button id="loreBoldBtn" type="button" class="tool-btn" title="Bold"><strong>B</strong></button>
+                  <button id="loreItalicBtn" type="button" class="tool-btn" title="Italic"><em>I</em></button>
+                  <button id="loreUnderlineBtn" type="button" class="tool-btn" title="Underline"><span class="tool-underline">U</span></button>
+                  <button id="loreStrikethroughBtn" type="button" class="tool-btn" title="Strikethrough"><span class="tool-strike">S</span></button>
+                  <button id="loreClearStyleBtn" type="button" class="tool-btn secondary" title="Clear formatting">Clear</button>
+                </div>
+
+                <div class="toolbar-group toolbar-inline-buttons">
+                  <button
+                          id="openLoreColorModalBtn"
+                          type="button"
+                          class="tool-btn color-tool-btn"
+                          title="Open text/shadow color editor"
+                  >
+                    Color
+                  </button>
+                  <button
+                          id="openLoreAtlasModalBtn"
+                          type="button"
+                          class="tool-btn atlas-tool-btn"
+                          title="Insert atlas sprite"
+                  >
+                    Atlas
+                  </button>
+                </div>
+              </div>
+
+              <div
+                      id="loreEditor"
+                      class="rich-editor multi-line"
+                      contenteditable="true"
+                      spellcheck="false"
+                      data-placeholder="Enter one lore line per line"
+              ></div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="panel generic-data-panel">
+        <h2>Additional Item Data</h2>
+
+        <div class="generic-data-grid">
+          <div class="field field-full">
+            <label for="extraCustomDataInput">Additional custom_data entries (top-level only, comma-separated)</label>
+            <textarea
+                    id="extraCustomDataInput"
+                    class="mono extra-data-box"
+                    placeholder='Example: marker:1b,customData:"someDataValue"'
+            ></textarea>
+          </div>
+
+          <div class="field field-full">
+            <label for="extraComponentsInput">Additional item components inside (comma-separated)</label>
+            <textarea
+                    id="extraComponentsInput"
+                    class="mono extra-data-box"
+                    placeholder='Example: enchantment_glint_override=true,max_stack_size=1'
+            ></textarea>
+          </div>
+        </div>
+      </section>
+
+      <section class="panel commands-panel">
+        <div class="commands-header">
+          <h2>Commands (one textbox per minecart)</h2>
+
+          <div class="replace-toolbar">
+            <input id="findAllInput" type="text" placeholder="Find in all commands" />
+            <input id="replaceAllInput" type="text" placeholder="Replace with" />
+            <button id="replaceAllBtn" class="secondary">Replace All</button>
+          </div>
+        </div>
+
+        <div class="command-actions-row">
+          <button id="addCommandTopBtn" class="secondary">Add Command To Top</button>
+          <button id="addCommandBtn">Add Command To Bottom</button>
+        </div>
+
+        <div id="commandsScroll" class="scroll-box commands-scroll">
+          <div id="commandsContainer"></div>
+        </div>
+
+        <div class="button-row">
+          <button id="generateBtn">Generate</button>
+          <button id="clearOutputBtn" class="secondary">Clear Output</button>
+          <button id="resetCommandsBtn" class="secondary">Reset Command Boxes</button>
+        </div>
+      </section>
+
+      <section class="panel output-panel">
+        <h2>Output</h2>
+
+        <div class="scroll-box output-scroll">
+          <div class="output-inner">
+            <label for="summonOutput">Summon command:</label>
+            <textarea id="summonOutput" class="mono output-box summon-box" readonly></textarea>
+
+            <label for="customOutput">custom_data value ({cmd:"..."}):</label>
+            <textarea id="customOutput" class="mono output-box custom-box" readonly></textarea>
+
+            <label for="giveOutput">Example /give command:</label>
+            <textarea id="giveOutput" class="mono output-box give-box" readonly></textarea>
+
+            <div class="button-row">
+              <button id="copySummonBtn" class="secondary">Copy Summon</button>
+              <button id="copyCustomBtn" class="secondary">Copy custom_data</button>
+              <button id="copyGiveBtn" class="secondary">Copy /give</button>
+            </div>
+          </div>
+        </div>
+
+        <div id="errorBox" class="error-box hidden"></div>
+      </section>
+    </div>
+  </div>
+</div>
+
+<div id="colorModalBackdrop" class="modal-backdrop hidden" aria-hidden="true">
+  <div id="colorModal" class="modal-card" role="dialog" aria-modal="true" aria-labelledby="colorModalTitle">
+    <div class="modal-header">
+      <h2 id="colorModalTitle">Color Editor</h2>
+      <button id="closeColorModalBtn" type="button" class="modal-close-btn secondary" aria-label="Close color editor">×</button>
+    </div>
+
+    <div class="modal-body">
+      <div class="modal-selection-preview-wrap">
+        <div class="modal-selection-label">Selected Text</div>
+        <div id="colorModalSelectionPreview" class="modal-selection-preview">No selection</div>
+      </div>
+
+      <div class="modal-tabs">
+        <button id="textColorTabBtn" type="button" class="modal-tab-btn active">Text Color</button>
+        <button id="shadowColorTabBtn" type="button" class="modal-tab-btn">Shadow Color</button>
+      </div>
+
+      <div id="textColorTabPanel" class="modal-tab-panel active">
+        <div class="gradient-panel">
+          <div class="gradient-panel-header">
+            <div class="gradient-panel-title">Gradient Stops</div>
+            <div class="gradient-panel-actions">
+              <button id="addTextGradientStopBtn" type="button">Add Gradient</button>
+            </div>
+          </div>
+
+          <div id="textGradientStopsContainer" class="gradient-stops-container"></div>
+        </div>
+      </div>
+
+      <div id="shadowColorTabPanel" class="modal-tab-panel">
+        <div class="gradient-panel">
+          <div class="gradient-panel-header">
+            <div class="gradient-panel-title">Shadow Gradient Stops</div>
+            <div class="gradient-panel-actions">
+              <button id="addShadowGradientStopBtn" type="button">Add Gradient</button>
+            </div>
+          </div>
+
+          <div id="shadowGradientStopsContainer" class="gradient-stops-container"></div>
+        </div>
+
+        <div class="shadow-opacity-panel">
+          <label for="modalShadowOpacityInput">Shadow opacity %</label>
+          <input id="modalShadowOpacityInput" type="number" min="0" max="100" step="1" value="100" />
+        </div>
+      </div>
+    </div>
+
+    <div class="modal-footer">
+      <button id="applyColorModalBtn" type="button">Set Color</button>
+    </div>
+  </div>
+</div>
+
+<div id="atlasModalBackdrop" class="modal-backdrop hidden" aria-hidden="true">
+  <div
+          id="atlasModal"
+          class="modal-card format-modal-card"
+          role="dialog"
+          aria-modal="true"
+          aria-labelledby="atlasModalTitle"
+  >
+    <div class="modal-header">
+      <h2 id="atlasModalTitle">Atlas Sprite Editor</h2>
+      <button
+              id="closeAtlasModalBtn"
+              type="button"
+              class="modal-close-btn secondary"
+              aria-label="Close atlas editor"
+      >
+        ×
+      </button>
+    </div>
+
+    <div class="modal-body">
+      <div class="modal-tabs">
+        <button id="atlasTabBtn" type="button" class="modal-tab-btn active">Atlas</button>
+        <button id="atlasFormattingTabBtn" type="button" class="modal-tab-btn">Formatting</button>
+      </div>
+
+      <div id="atlasTabPanel" class="modal-tab-panel active">
+        <div class="atlas-manager-shell">
+          <div class="atlas-manager-grid">
+            <div class="atlas-manager-left">
+              <div class="field atlas-field">
+                <label for="atlasCategorySelect">Atlas Group</label>
+                <select id="atlasCategorySelect"></select>
+              </div>
+
+              <div class="field atlas-field">
+                <label>Atlas Sprite</label>
+
+                <button
+                        id="atlasPickerDisplay"
+                        type="button"
+                        class="atlas-picker-display"
+                        aria-expanded="false"
+                >
+                  <span id="atlasPickerDisplayIcon" class="atlas-picker-display-icon"></span>
+                  <span id="atlasPickerDisplayName" class="atlas-picker-display-name">Choose sprite</span>
+                  <span class="atlas-picker-display-caret">▼</span>
+                </button>
+
+                <div id="atlasPickerDropdown" class="atlas-picker-dropdown" style="display:none;">
+                  <div class="atlas-picker-search-wrap">
+                    <input
+                            id="atlasPickerSearchInput"
+                            type="text"
+                            placeholder="Search blocks..."
+                            autocomplete="off"
+                            class="atlas-picker-search-input"
+                    />
+                  </div>
+                  <div id="atlasPickerList" class="atlas-picker-list"></div>
+                </div>
+              </div>
+            </div>
+
+            <div class="atlas-manager-right">
+              <div class="atlas-preview-label">Preview</div>
+              <div id="atlasPreviewBox" class="atlas-preview-box atlas-preview-box-large">
+                <div id="atlasPreviewSprite" class="atlas-preview-sprite atlas-preview-sprite-large"></div>
+              </div>
+
+              <div class="atlas-meta-box">
+                <div><strong>Sprite:</strong> <span id="atlasSelectedName">None</span></div>
+                <div><strong>Group:</strong> <span id="atlasSelectedGroup">None</span></div>
+              </div>
+            </div>
+          </div>
+
+          <div class="atlas-object-fields">
+            <div class="field field-full hidden">
+              <label for="atlasSearchInput">Legacy Search Atlas</label>
+              <input id="atlasSearchInput" type="text" placeholder="Search sprite name..." />
+            </div>
+
+            <div class="field field-full hidden">
+              <label for="atlasSpriteSelect">Legacy Atlas Sprite Select</label>
+              <select id="atlasSpriteSelect" size="10"></select>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div id="atlasFormattingTabPanel" class="modal-tab-panel">
+        <div class="modal-selection-preview-wrap">
+          <div class="modal-selection-label">Atlas Preview</div>
+          <div id="atlasModalSelectionPreview" class="modal-selection-preview">No atlas selected</div>
+        </div>
+
+        <div class="formatting-controls-panel">
+          <div class="formatting-toggle-row">
+            <button id="atlasBoldBtn" type="button" class="tool-btn" title="Bold"><strong>B</strong></button>
+            <button id="atlasItalicBtn" type="button" class="tool-btn" title="Italic"><em>I</em></button>
+            <button id="atlasUnderlineBtn" type="button" class="tool-btn" title="Underline"><span class="tool-underline">U</span></button>
+            <button id="atlasStrikethroughBtn" type="button" class="tool-btn" title="Strikethrough"><span class="tool-strike">S</span></button>
+            <button id="atlasClearFormattingBtn" type="button" class="tool-btn secondary" title="Clear formatting">Clear</button>
+          </div>
+
+          <div class="modal-subtabs">
+            <button id="atlasTextColorTabBtn" type="button" class="modal-tab-btn active">Text Color</button>
+            <button id="atlasShadowColorTabBtn" type="button" class="modal-tab-btn">Shadow Color</button>
+          </div>
+
+          <div id="atlasTextColorTabPanel" class="modal-tab-panel active">
+            <div class="gradient-panel">
+              <div class="gradient-panel-header">
+                <div class="gradient-panel-title">Gradient Stops</div>
+                <div class="gradient-panel-actions">
+                </div>
+              </div>
+
+              <div id="atlasTextGradientStopsContainer" class="gradient-stops-container"></div>
+            </div>
+          </div>
+
+          <div id="atlasShadowColorTabPanel" class="modal-tab-panel">
+            <div class="gradient-panel">
+              <div class="gradient-panel-header">
+                <div class="gradient-panel-title">Shadow Gradient Stops</div>
+                <div class="gradient-panel-actions">
+                </div>
+              </div>
+
+              <div id="atlasShadowGradientStopsContainer" class="gradient-stops-container"></div>
+            </div>
+
+            <div class="shadow-opacity-panel">
+              <label for="atlasModalShadowOpacityInput">Shadow opacity %</label>
+              <input
+                      id="atlasModalShadowOpacityInput"
+                      type="number"
+                      min="0"
+                      max="100"
+                      step="1"
+                      value="100"
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="modal-footer modal-footer-split">
+      <div class="modal-footer-left">
+        <button id="insertAtlasBtn" type="button">Insert Atlas</button>
+      </div>
+
+      <div class="modal-footer-right">
+        <button id="deleteAtlasBtn" type="button" class="secondary">Delete Atlas</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<template id="commandRowTemplate">
+  <div class="command-row">
+    <div class="drag-handle-wrap">
+      <button type="button" class="drag-handle secondary" title="Drag to reorder" draggable="true">☰</button>
+    </div>
+
+    <div class="command-label"></div>
+
+    <textarea class="mono command-text"></textarea>
+
+    <div class="command-controls">
+      <button class="move-up-btn secondary" type="button">Move Up</button>
+      <button class="move-down-btn secondary" type="button">Move Down</button>
+      <button class="insert-above-btn secondary" type="button">Insert Above</button>
+      <button class="insert-below-btn secondary" type="button">Insert Below</button>
+      <button class="remove-command-btn secondary" type="button">Remove</button>
+    </div>
+  </div>
+</template>
+
+<template id="gradientStopTemplate">
+  <div class="gradient-stop-row">
+    <button type="button" class="gradient-picker-btn" title="Open color picker">
+      <input type="color" class="gradient-color-picker" value="#ffffff" />
+    </button>
+
+    <div class="gradient-hash-label">#</div>
+
+    <input type="text" class="gradient-color-hex mono" value="ffffff" maxlength="6" placeholder="ffffff" />
+
+    <button type="button" class="gradient-add-btn">+</button>
+    <button type="button" class="gradient-remove-btn secondary">🗑</button>
+  </div>
+</template>
+
+<script>
+  window.ATLAS_IMAGE_URL = "Images/atlasSprites.png";
+</script>
+<script src="webScripts/atlas-data.js"></script>
+<script src="webScripts/mcparser-core.js"></script>
+<script src="webScripts/mcparser-editor.js"></script>
+<script src="webScripts/mcparser-color.js"></script>
+<script src="webScripts/mcparser-atlas-parser.js"></script>
+<script src="webScripts/script.js"></script>
+</body>
+</html>

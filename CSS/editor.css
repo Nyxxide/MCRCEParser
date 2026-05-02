@@ -1,0 +1,173 @@
+.styled-sections {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 20px;
+}
+
+.styled-block {
+    border: 1px solid var(--border);
+    border-radius: var(--radius-sm);
+    background: rgba(255, 255, 255, 0.02);
+    padding: 14px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.styled-block-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+}
+
+.editor-block {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.toolbar-group {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    align-items: center;
+}
+
+.selection-toolbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 10px;
+    padding: 10px;
+    border: 1px solid var(--border);
+    border-radius: var(--radius-sm);
+    background: rgba(0, 0, 0, 0.25);
+}
+
+.toolbar-inline-buttons {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+}
+
+.tool-btn {
+    min-width: 40px;
+    height: 40px;
+    padding: 0;
+    border-radius: 10px;
+    background: #0d1016;
+    border: 1px solid var(--border);
+    color: var(--text);
+    font-weight: bold;
+}
+
+.tool-btn:hover {
+    background: var(--button-secondary-hover);
+}
+
+.tool-btn.secondary {
+    font-weight: normal;
+}
+
+.tool-underline {
+    text-decoration: underline;
+}
+
+.tool-strike {
+    text-decoration: line-through;
+}
+
+.color-tool-btn,
+.atlas-tool-btn {
+    padding: 0 14px;
+}
+
+.rich-editor {
+    width: 100%;
+    background: #0d1016;
+    color: var(--text);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-sm);
+    padding: 12px 14px;
+    outline: none;
+    font-family: var(--mono);
+    overflow: auto;
+    white-space: pre-wrap;
+    word-break: break-word;
+    caret-color: var(--text);
+}
+
+.rich-editor:focus {
+    border-color: var(--accent);
+}
+
+.rich-editor.single-line {
+    min-height: 50px;
+    max-height: 50px;
+    overflow-y: hidden;
+    white-space: nowrap;
+    font-family: "Minecraft";
+    font-size: 20px;
+}
+
+.rich-editor.multi-line {
+    min-height: 130px;
+    font-family: "Minecraft";
+    font-size: 20px;
+    color: #aa00aa;
+}
+
+.rich-editor:empty::before {
+    content: attr(data-placeholder);
+    color: #6f7a8e;
+    pointer-events: none;
+}
+
+.rich-editor span[data-bold="1"] {
+    font-weight: 1500 !important;
+    text-shadow: 0.55px 0 currentColor;
+}
+
+.tool-btn.active {
+    color: #8ecbff;
+    border-color: #8ecbff;
+}
+
+.rich-editor span[data-has-underline="1"],
+.rich-editor span[data-has-strike="1"] {
+    position: relative;
+    display: inline-block;
+}
+
+.rich-editor span[data-has-underline="1"]::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0.02em;
+    height: 2px;
+    background: currentColor;
+    pointer-events: none;
+}
+
+.rich-editor span[data-has-strike="1"]::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 52%;
+    height: 2px;
+    background: currentColor;
+    pointer-events: none;
+    transform: translateY(-50%);
+}
+
+.rich-editor span[data-shadow-color][data-has-underline="1"]::before,
+.rich-editor span[data-shadow-color][data-has-strike="1"]::after {
+    box-shadow: 2px 2px 1px color-mix(
+            in srgb,
+            var(--decoration-shadow-color) calc(var(--decoration-shadow-opacity) * 100%),
+            transparent
+    );
+}
