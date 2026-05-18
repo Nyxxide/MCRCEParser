@@ -1,4 +1,4 @@
-name: Deploy MCDataGen (Tailnet)
+name: Deploy MCRCEParser (Tailnet)
 
 on:
   push:
