@@ -1,0 +1,66 @@
+html,
+body {
+    margin: 0;
+    padding: 0;
+}
+
+#topBar {
+    font-family: "Minecraft";
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 9999;
+
+    height: 56px;
+    display: flex;
+    align-items: stretch;
+    justify-content: space-between;
+    gap: 16px;
+
+    padding-left: 14px;
+    background: rgba(0, 0, 0, 0.72);
+    border-bottom: 1px solid rgba(255,255,255,0.12);
+    color: #fff;
+    box-sizing: border-box;
+}
+
+.app-shell {
+    padding-top: 56px;
+}
+
+#topBarLeft {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    min-width: 0;
+}
+
+#homeBtn {
+    width: 40px;
+    height: 40px;
+    flex: 0 0 40px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    padding: 4px;
+    box-sizing: border-box;
+    text-decoration: none;
+}
+
+#homeBtnImg {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    display: block;
+    image-rendering: auto;
+}
+
+#topBarTitle {
+    font-size: 20px;
+    font-weight: 600;
+    white-space: nowrap;
+    align-self: center;
+}
